@@ -31,3 +31,7 @@ In addition, an employee can be updated in the following ways:
 7. Transfer department
 8. Quit your company
 9. Transfer to a new company
+# Important information to run the project:
+This project utilizes the .jar connection file to connect Java to MySQL. Make sure to add that file into your build-path to execute the code properly.
+In addition, in the "config.properties" folder, make sure your server host, username and password are updated to reflect your local values. The ones listed in the project will not work for you as is.
+Finally, make sure the MySQL server is on and running, and the ems-schema file is run and built first before executing any of the Java code.
