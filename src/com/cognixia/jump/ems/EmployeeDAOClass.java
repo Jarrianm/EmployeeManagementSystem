@@ -215,7 +215,9 @@ public class EmployeeDAOClass implements EmployeeDAO{
 				PreparedStatement pstmt = conn.prepareStatement("update employee set company_id = 0 where employee_id = ?");
 				pstmt.setInt(1, id);
 				rows = pstmt.executeUpdate();
-				
+				pstmt = conn.prepareStatement("update employee set dept_id = 0 where employee_id = ?");
+				pstmt.setInt(1, id);
+				pstmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -226,8 +228,17 @@ public class EmployeeDAOClass implements EmployeeDAO{
 				cdc.getCompanies();
 				System.out.println("Enter a company_id from above to transfer to that company");
 				int c = scan.nextInt();
+				cdc.getDepartments(c);
+				System.out.println("Enter a department_id to transfer to that department within the company");
+				int d = scan.nextInt();
+				
 				PreparedStatement pstmt = conn.prepareStatement("update employee set company_id = ? where employee_id = ?");
 				pstmt.setInt(1, c);
+				pstmt.setInt(2, id);
+				rows = pstmt.executeUpdate();
+				
+				pstmt = conn.prepareStatement("update employee set dept_id = ? where employee_id = ?");
+				pstmt.setInt(1, d);
 				pstmt.setInt(2, id);
 				rows = pstmt.executeUpdate();
 				

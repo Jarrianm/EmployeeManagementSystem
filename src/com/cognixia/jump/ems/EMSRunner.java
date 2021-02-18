@@ -15,6 +15,8 @@ public class EMSRunner {
 		CompanyDAOClass companies = new CompanyDAOClass();
 //		companies.getAllEmployees(1);
 //		companies.updateCompany(1);
+//		companies.getAllEmployees(2);
+//		companies.getAllEmployees(2);
 //		companies.getCompanies();
 //		companies.deleteCompany(1);
 //		companies.getCompanies();
@@ -36,8 +38,9 @@ public class EMSRunner {
 //		
 		EmployeeDAOClass e = new EmployeeDAOClass();
 //		d.printEmployees(1);
-//		e.updateEmployee(2);
+//		e.updateEmployee(1);
 //		d.printEmployees(1);
+//		companies.getAllEmployees(2);
 //		d.printEmployees(19);
 //		e.getEmployees();
 //		d.printEmployees(1);

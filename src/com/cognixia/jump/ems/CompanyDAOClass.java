@@ -133,12 +133,14 @@ public class CompanyDAOClass implements CompanyDAO{
 			System.out.println("Select an employee_id from above to fire that employee");
 			int fire = scan.nextInt();
 			try {
-				String cd = "update employee set company_id = ? where employee_id = ?";
+				String cd = "update employee set company_id = 0 where employee_id = ?";
 				PreparedStatement pstmt = conn.prepareStatement(cd);
 				pstmt.setInt(1, fire);
-				pstmt.setInt(2, id);
 				rows = pstmt.executeUpdate();
-				
+				String department_update = "update employee set dept_id = 0 where employee_id = ?";
+				pstmt = conn.prepareStatement(department_update);
+				pstmt.setInt(1, fire);
+				rows = pstmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -149,8 +151,25 @@ public class CompanyDAOClass implements CompanyDAO{
 			int transfer = scan.nextInt();
 			getCompanies();
 			System.out.println("Select a company_id to transer the employee to");
-			int newOne = scan.nextInt();
-			
+			int newComp = scan.nextInt();
+			getDepartments(newComp);
+			System.out.println("Select a department to transfer the employee into");
+			int newDepart = scan.nextInt();
+			try {
+				String cd = "update employee set company_id = ? where employee_id = ?";
+				String department_update = "update employee set dept_id = ? where employee_id = ?";
+				PreparedStatement pstmt = conn.prepareStatement(cd);
+				pstmt.setInt(1, newComp);
+				pstmt.setInt(2, transfer);
+				pstmt.executeUpdate();
+				
+				pstmt = conn.prepareStatement(department_update);
+				pstmt.setInt(1, newDepart);
+				pstmt.setInt(2, transfer);
+				rows = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			break;
 		default:
 			System.out.println("Invalid input");
