@@ -147,6 +147,10 @@ public class CompanyDAOClass implements CompanyDAO{
 			getAllEmployees(id);
 			System.out.println("Select an employee_id to transfer them to a new company");
 			int transfer = scan.nextInt();
+			getCompanies();
+			System.out.println("Select a company_id to transer the employee to");
+			int newOne = scan.nextInt();
+			
 			break;
 		default:
 			System.out.println("Invalid input");
