@@ -67,7 +67,7 @@ public class EmployeeDAOClass implements EmployeeDAO{
 						rs.getString("last_name"),
 						rs.getString("gender"),
 						rs.getDate("date_of_birth"),
-						rs.getInt("credits"),
+						rs.getInt("salary"),
 						address,
 						department,
 						company);
@@ -80,21 +80,21 @@ public class EmployeeDAOClass implements EmployeeDAO{
 		}
 		return employee;
 	}
-
 	@Override
 	public boolean addEmployee(Employee employee) {
 		int rows = 0;
 		
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("insert into employee (first_name, last_name, gender, date_of_birth, salary, address, department) "
-					+ "values (?,?,?,?,?,?,?)");
+			PreparedStatement pstmt = conn.prepareStatement("insert into employee (first_name, last_name, gender, date_of_birth, salary, address, department, company) "
+					+ "values (?,?,?,?,?,?,?,?)");
 			pstmt.setString(1, employee.getFirst_name());
 			pstmt.setString(2, employee.getLast_name());
 			pstmt.setString(3, employee.getGender());
 			pstmt.setDate(4, (java.sql.Date) employee.getDob());
 			pstmt.setInt(5, employee.getSalary());
-			pstmt.setObject(6, employee.getAddress());
-			pstmt.setObject(7, employee.getDepartment());
+			pstmt.setInt(6, employee.getAddress().getId());
+			pstmt.setInt(7, employee.getDepartment().getId());
+			pstmt.setInt(8, employee.getCompany().getId());
 			
 			rows = pstmt.executeUpdate();
 			
