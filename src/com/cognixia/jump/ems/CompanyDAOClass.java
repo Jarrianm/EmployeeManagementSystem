@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.cognixia.jump.models.Address;
 import com.cognixia.jump.models.Company;
 import com.cognixia.jump.models.Department;
+import com.cognixia.jump.models.Employee;
 
 public class CompanyDAOClass implements CompanyDAO{
 	Connection conn = ConnectionManager.getConnection();
@@ -223,16 +225,35 @@ public class CompanyDAOClass implements CompanyDAO{
 
 	@Override
 	public void getAllEmployees(int id) {
+
+		AddressDAOClass adc = new AddressDAOClass();
+		DepartmentDAOClass ddc  = new DepartmentDAOClass();
+		String test = "select * from employee where company_id = ?";
+		List<Employee> emp = new ArrayList<>();
 		
-		DepartmentDAOClass ddc = new DepartmentDAOClass();
-		
-		List<Department> departments = getDepartments(id);
-		
-		//ArrayList<List<Employee>> employees = new ArrayList<List<Employee>>();
-		
-		for(Department d : departments) {
-			//employees.add(ddc.printEmployees(d.getId()));
-			System.out.println(ddc.printEmployees(d.getId()));
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(test);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Address address = adc.getAddress(rs.getInt("address_id"));
+				Department department = ddc.getDepartment(rs.getInt("dept_id"));
+				Company company = getCompany(rs.getInt("company_id"));
+				Employee e = new Employee(rs.getInt("employee_id"),
+						rs.getString("first_name"),
+						rs.getString("last_name"),
+						rs.getString("gender"),
+						rs.getDate("date_of_birth"),
+						rs.getInt("salary"),
+						address,
+						department,
+						company);
+				emp.add(e);
+				System.out.println(e);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}	
 }
