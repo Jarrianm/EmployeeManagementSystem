@@ -85,7 +85,7 @@ public class EmployeeDAOClass implements EmployeeDAO{
 		int rows = 0;
 		
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("insert into employee (first_name, last_name, gender, date_of_birth, salary, address, department, company) "
+			PreparedStatement pstmt = conn.prepareStatement("insert into employee (first_name, last_name, gender, date_of_birth, salary, address_id, dept_id, company_id) "
 					+ "values (?,?,?,?,?,?,?,?)");
 			pstmt.setString(1, employee.getFirst_name());
 			pstmt.setString(2, employee.getLast_name());
