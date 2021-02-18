@@ -17,7 +17,7 @@ In addition, a department can be updated in the following ways:
 1. Name
 2. Phone
 3. Change company
-4. Trasnfer employee to a new department
+4. Transfer employee to a new department
 5. Remove an employee from the department
 # Employee functionality:
 An employee can be added to or deleted from the database, and all of them can be retrieved at once.
